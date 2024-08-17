@@ -5,7 +5,27 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: yarn install && yarn run build
-    command: yarn run watch
-
+  - init: 
+      nvm install 16
+      nvm use 16
+      npm install -g @webiny/cli
+      yarn install && yarn run build
+      sudo apt-get update
+      sudo apt-get install -y curl unzip
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+    command: 
+      yarn run watch
+      webiny create project syn
+      cd syn
+      webiny deploy api --env=dev
+ports:
+  - port: 3000
+    onOpen: open-preview
+vscode:
+  extensions:
+    - ms-azuretools.vscode-docker
+    - amazonwebservices.aws-toolkit-vscode
+    - esbenp.prettier-vscode
 
